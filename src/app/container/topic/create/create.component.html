@@ -1,0 +1,72 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>Markdown 语法参考</span>
+    </div>
+    <div class='inner'>
+      <ol>
+        <li>### 单行的标题</li>
+        <li>**粗体**</li>
+        <li>`console.log('行内代码')`</li>
+        <li>```js\n code \n``` 标记代码块</li>
+        <li>[内容](链接)</li>
+        <li>![文字说明](图片链接)</li>
+      </ol>
+      <span><a href='https://segmentfault.com/markdown' target='_blank'>Markdown 文档</a></span>
+    </div>
+  </div>
+
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>话题发布指南</span>
+    </div>
+    <div class='inner'>
+      <ol>
+        <li>尽量把话题要点浓缩到标题里</li>
+        <li>代码含义和报错可在 <a href="http://segmentfault.com/t/node.js">SegmentFault</a> 提问</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ol class='breadcrumb'>
+        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+        <li class='active' *ngIf="actionOperate === 'edit'">编辑话题</li>
+        <li class='active' *ngIf="actionOperate === 'create'" >发布话题</li>
+      </ol>
+    </div>
+    <div class='inner post'>
+      <div class="alert alert-error" *ngIf="errorMessage">
+        <strong>{{errorMessage}}</strong>
+      </div>
+
+        <form   #create_topic_form="ngForm"  id='create_topic_form' action='/api/topic/create' method='post'>
+          <fieldset>
+            <span class="tab-selector">选择版块：</span>
+            <select name="tab" id="tab"  [(ngModel)]="topic.tab" >
+              <option *ngFor="let tab of tabTypes"  value="{{tab.id}}">{{tab.text}}</option>
+            </select>
+            <span id="topic_create_warn"></span>
+           <textarea autofocus class='span9' id='title' [(ngModel)] ="topic.title" name='title' rows='1'
+                      placeholder="标题字数 10 字以上"
+            ></textarea>
+            <div class='markdown_editor in_editor'>
+              <div class='markdown_in_editor' >
+                <textarea class='editor'[(ngModel)] ="topic.t_content" name='t_content' #t_content  id='t_content'   rows='20'
+                          placeholder='文章支持 Markdown 语法, 请注意标记代码'
+                ></textarea>
+                <div class='editor_buttons'>
+                  <input type="submit" class='span-primary submit_btn' (click) ="save(t_content)" data-loading-text="提交中"
+                         value="提交">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+  </div>
+</div>
+

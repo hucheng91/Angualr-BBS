@@ -1,0 +1,16 @@
+<div class='panel'>
+  <div class='header'>
+    <span class='col_fade'>积分榜</span>
+    &nbsp;
+    <a class='dark' href='/users/top100'>TOP 100 &gt;&gt;</a>
+  </div>
+  <div class='inner' *ngIf="tops">
+    <ol *ngFor="let user of tops">
+      <li>
+        <span class='top_score'>{{user.score}}</span>
+        <span class="user_name"><a href="/user/<%= user.loginname %>">{{user.loginname}}</a></span>
+      </li>
+    </ol>
+  </div>
+  <p *ngIf="!tops">无</p>
+</div>

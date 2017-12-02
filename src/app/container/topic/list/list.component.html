@@ -1,0 +1,45 @@
+<div id="topic_list" >
+
+  <div class="inner" *ngIf="topics && topics.length === 0">
+    <p>无话题</p>
+  </div>
+  <div class='cell'  *ngFor="let topic of topics">
+
+    <a class="user_avatar pull-left" href="{{topic.author.loginname}}">
+      <img [src]="topic.author.avatar_url"
+           title="topic.author.loginname"
+      />
+    </a>
+
+    <span class="reply_count pull-left">
+    <span class="count_of_replies" title="回复数">
+      {{topic.reply_count}}
+    </span>
+    <span class="count_seperator">/</span>
+    <span class="count_of_visits" title='点击数'>
+      {{topic.visit_count}}
+    </span>
+  </span>
+    <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" (click)="detail(topic.id)" >
+      <img class="user_small_avatar" [src]="topic.reply.author.avatar_url">
+      <span class="last_active_time">{{topic.reply}}</span>
+    </a>
+    <span class='last_time pull-right'>
+      <span class="last_active_time">{{topic.create_at}}</span>
+    </span>
+    <div class="topic_title_wrapper">
+
+      <span class='put_top' *ngIf="topic.top">置顶</span>
+      <span class='put_good' *ngIf="topic.good">精华</span>
+      <span class="topiclist-tab" *ngIf="!topic.top && !topic.good">{{topic.tab | tabsPipe}}</span>
+
+      <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" (click)="detail(topic.id)" title='{{topic.title}}'>
+        {{topic.title}}
+      </a>
+    </div>
+  </div>
+</div>
+<div class='pagination'>
+  <pagination  (pageChanged)="pageChanged($event)" [boundaryLinks]="true" [totalItems]="totalItems"  [itemsPerPage] ="itemsPerPage" [(ngModel)]="currentPage" class="pagination-sm"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+</div>

@@ -1,0 +1,50 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="userInfo" [headerLabel]="headerLabel"></app-user-information>
+    <div class='inner' *ngIf="!userInfo">
+      <p>{{siteDes}}</p>
+      <div>
+        您可以
+        <a href='/signin'>登录</a>
+        或
+        <a href='/signup'>注册</a>
+        , 也可以
+        <a href="/auth/github">
+          <span class="span-info">
+            通过 GitHub 登录
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="panel" *ngIf="userInfo">
+      <div class='inner'>
+        <a  routerLinkActive="active" [routerLink]="['/topic/create']"  id='create_topic_btn'>
+          <span class='span-success'>发布话题</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <app-no-reply-topic [noReplyTopics]="noReplayTopic" ></app-no-reply-topic>
+  <app-top-star [topsTopic]="topsTopic"></app-top-star>
+  <app-friendbbs></app-friendbbs>
+</div>
+<div id="content">
+  <div class="panel">
+    <div class="header">
+      <a  [ngClass]="{'current-tab': activeItemIndex === 1}" (click)="swichTab('all',1)" class="topic-tab ">全部</a>
+
+      <a  [ngClass]="{'current-tab': activeItemIndex === 2}" class="topic-tab " (click)="swichTab('good',2)">精华</a>
+
+      <a  [ngClass]="{'current-tab': activeItemIndex === 3}" class="topic-tab " (click)="swichTab('share',3)">分享</a>
+
+      <a  [ngClass]="{'current-tab': activeItemIndex === 4}" class="topic-tab " (click)="swichTab('ask',4)">问答</a>
+
+      <a  [ngClass]="{'current-tab': activeItemIndex === 5}" class="topic-tab " (click)="swichTab('job',5)">招聘</a>
+
+    </div>
+    <div class="inner no-padding">
+      <app-topic-list></app-topic-list>
+    </div>
+
+  </div>
+</div>

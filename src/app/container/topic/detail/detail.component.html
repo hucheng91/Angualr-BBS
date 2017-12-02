@@ -1,0 +1,135 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="author" [headerLabel]="headerLabel"></app-user-information>
+
+  </div>
+
+  <!--广告-->
+
+  <!--<div class='panel'>-->
+    <!--<div class='header'>-->
+      <!--<span class='col_fade'>作者其它话题</span>-->
+    <!--</div>-->
+    <!--<div class='inner'>-->
+      <!--<% if (typeof(author_other_topics) === 'undefined' || author_other_topics.length > 0) { %>-->
+      <!--<ul class='unstyled'>-->
+        <!--<%- partial('../topic/small', { collection: author_other_topics, as: 'topic' }) %>-->
+      <!--</ul>-->
+      <!--<% } else { %>-->
+      <!--<p>无</p>-->
+      <!--<% } %>-->
+    <!--</div>-->
+  <!--</div>-->
+  <app-no-reply-topic [noReplyTopics]="authorOtherTopics" [title]="authorOtherTopicTitle"></app-no-reply-topic>
+
+  <app-no-reply-topic [noReplyTopics]="noReplayTopic"></app-no-reply-topic>
+</div>
+
+<div id='content'>
+  <div class='panel'>
+    <div class='header topic_header'>
+      <span class="topic_full_title">
+        <span *ngIf="topic.top" class='put_top'>置顶</span>
+        <span  *ngIf="topic.good" class='put_good'>精华</span>
+        <span *ngIf="topic.tab && (!topic.good) &&  (!topic.top)" class="topiclist-tab">{{topic.tab | tabsPipe}}</span>
+        {{topic.title}}
+      </span>
+      <div class="changes">
+        <span>发布于{{topic.create_at}}</span>
+        <span>
+          <!--作者 <a href="/user/topic.author.loginname">{{topic.author.loginname}}</a>-->
+        </span>
+        <span>{{topic.visit_count}}次浏览</span>
+        <span >最后一次编辑是 {{topic.update_at}}</span>
+        <span *ngIf="topic.tab"> 来自 {{topic.tab | tabsPipe}}</span>
+        <!--action= "{{isCollect ? 'de_collect':  'collect'}}"-->
+        <button  *ngIf="isLogin" class=" span-common  pull-right collect_btn {{isCollect ? '' : ' span-success' }}"  type="button" (click)="collectTopic(topic)"  >
+        {{isCollect ? '取消收藏' : '收藏'}}
+        </button>
+      </div>
+
+    </div>
+    <div class='inner topic'>
+
+      <div class='topic_content' [innerHtml] = "topic.content">
+
+      </div>
+    </div>
+  </div>
+  <div class='panel' *ngIf="replies && replies.length > 0">
+    <div class='header'>
+      <span class='col_fade'>{{replies.length }}回复</span>
+    </div>
+    <div *ngFor="let reply of replies;let i=index">
+        <div class="cell reply_area reply_item {{ reply.ups && reply.ups.length >= topic.reply_up_threshold ? 'reply_highlight' : ''}}"
+          reply_id="reply.id" reply_to_id="reply.reply_id" id="{{reply.id}}">
+            <div class="author_content">
+              <a href="/user/<%= reply.author.loginname %>" class="user_avatar">
+                <img [src]="reply.author.avatar_url" title="reply.author.loginname"/></a>
+
+              <div class="user_info">
+                <a class="dark reply_author" href="/user/<%= reply.author.loginname %>">{{reply.author.loginname}}</a>
+                <a class="reply_time" href="#<%= reply._id %>">{{i+ 1}} 楼• {{reply.create_at}}</a>
+
+                <span   *ngIf="reply.author.loginname === topic.author.loginname" class="reply_by_author">作者</span>
+              </div>
+              <div class='user_action'>
+                <span>
+                  <i class="fa up_btn fa-thumbs-o-up" (click)="ups(reply,upCountSpan)"
+                     title="喜欢"></i>
+                  <span class="up-count" #upCountSpan>
+                    {{reply.ups.length}}
+                  </span>
+                </span>
+                <span *ngIf="current_user && current_user._id == reply.author._id">
+                  <a   class='edit_reply_btn' (click)="showEditReply(reply2_area,reply2_editor,reply)">
+                    <i class="fa fa-pencil-square-o" title='编辑'></i>
+                  </a>
+                  <a href='javascript:void(0);' class='delete_reply_btn' (click)="deleteReply(reply.id)">
+                    <i class="fa fa-trash" title='删除'></i>
+                  </a>
+                </span>
+                <span *ngIf="current_user" (click)="showAddReplyEditor(reply2_area,reply2_editor,reply)">
+                    <i class="fa fa-reply reply2_btn" title="回复"></i>
+                </span>
+              </div>
+            </div>
+            <div class='reply_content from-<%= reply.author.loginname %>' [innerHtml]="reply.content">
+        </div>
+        <div class='clearfix' [hidden] = "true"  #reply2_area>
+          <div class='reply2_area' >
+              <div class='markdown_editor in_editor'>
+                <div class='markdown_in_editor'>
+                  <textarea #reply2_editor class='span8 editor reply_editor'
+                             name='r_content' rows='4'></textarea>
+                  <div class='editor_buttons'>
+                    <input class='btn btn-primary'
+                           type="button" (click)="replayTopic(reply)" data-id='{{reply._id}}' data-loading-text="回复中.." value="回复">
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+  <div class='panel' *ngIf="current_user && topic ">
+    <div class='header'>
+      <span class='col_fade'>添加回复</span>
+    </div>
+    <div class='inner reply'>
+
+      <div class='markdown_editor in_editor'>
+        <div class='markdown_in_editor'>
+          <textarea class='frist_editor' name='r_content' rows='8'></textarea>
+
+          <div class='editor_buttons'>
+            <input class='btn btn-primary ' type="button" (click)="replayFristTopic()" data-loading-text="回复中.." value="回复 {{topic.lock ? '(此主题已锁定)' : ''}} "  disabled= "{{topic.lock ? 'disabled': ''}}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

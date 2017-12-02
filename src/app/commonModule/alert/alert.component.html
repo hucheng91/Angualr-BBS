@@ -1,0 +1,12 @@
+<p-growl [(value)]="msgs" life="{{growlLife}}" ></p-growl>
+<p-confirmDialog #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" label="确认" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" label="取消" (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+<p-dialog  [(visible)]="display" modal="modal" [closeOnEscape] ="false" [dismissableMask]="false" [showHeader]= "false" [closable]="false" width="100" [responsive]="true">
+  <div class="">
+    <img src="assets/img/reload.gif" style="width: 100px;height: 100px;">
+  </div>
+</p-dialog>

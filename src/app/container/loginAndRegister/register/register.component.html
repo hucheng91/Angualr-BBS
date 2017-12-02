@@ -1,0 +1,92 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>关于</span>
+    </div>
+    <div class='inner'>
+      <p>{{siteDes}}</p>
+
+      <p>在这里你可以：</p>
+      <ul>
+        <li>向别人提出你遇到的问题</li>
+        <li>帮助遇到问题的人</li>
+        <li>分享自己的知识</li>
+        <li>和其它人一起进步</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id='content'>
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a routerLinkActive="active" [routerLink]="['/']">主页</a><span class='divider'>/</span></li>
+        <li class='active'>注册</li>
+      </ul>
+    </div>
+    <div class='inner'>
+      <form  class='form-horizontal' #registerForm="ngForm" >
+        <div class='control-group'>
+          <label class='control-label' for='loginname'>用户名</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='loginname' name='loginname' [(ngModel)]="user.loginname" #loginname="ngModel"  required size='30' type='text' />
+            <div *ngIf="loginname.invalid && (loginname.dirty || loginname.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="loginname.errors.required">
+                用户名必填
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='pass'>密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='pass' name='pass' size='30'[(ngModel)]="user.pass" #pass="ngModel"  required  type='password'/>
+            <div *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="pass.errors.required">
+                密码必填
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='re_pass'>确认密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='re_pass' name='re_pass' size='30' [(ngModel)]="user.re_pass" #re_pass="ngModel"  required type='password'/>
+            <div *ngIf="re_pass.invalid && (re_pass.dirty || re_pass.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="re_pass.errors.required">
+                密码必填
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='email'>电子邮箱</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' id='email' name='email' size='30' [(ngModel)]="user.email" #email="ngModel"  required  type='text'/>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                密码必填
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+        <div class='form-actions'>
+          <input type='button' class='span-primary' value='注册' [disabled]="!registerForm.form.valid" (click)="register()" />
+          <a href="/auth/github">
+            <span class="span-info">
+              通过 GitHub 登录
+            </span>
+          </a>
+        </div>
+    </div>
+  </div>
+</div>
