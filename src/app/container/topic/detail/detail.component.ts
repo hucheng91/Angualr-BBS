@@ -86,8 +86,19 @@ export class DetailComponent implements OnInit,AfterViewInit {
   }
 
 
-  collectTopic(topic) {
-
+  operateCllect() {
+    // 取消收藏
+    if (this.isCollect) {
+        this.topServcie.delCollection(this.topic._id).subscribe((res: any) => {
+          this.isCollect = false;
+        });
+    }else {
+      // 收藏
+      this.topServcie.collection(this.topic._id).subscribe(() => {
+        this.alertServcie.success("","收藏成功");
+        this.isCollect = true;
+      });
+    }
   }
 
   /**

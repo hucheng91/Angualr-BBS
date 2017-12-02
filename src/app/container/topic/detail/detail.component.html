@@ -43,7 +43,7 @@
         <span >最后一次编辑是 {{topic.update_at}}</span>
         <span *ngIf="topic.tab"> 来自 {{topic.tab | tabsPipe}}</span>
         <!--action= "{{isCollect ? 'de_collect':  'collect'}}"-->
-        <button  *ngIf="isLogin" class=" span-common  pull-right collect_btn {{isCollect ? '' : ' span-success' }}"  type="button" (click)="collectTopic(topic)"  >
+        <button  *ngIf="isLogin" class=" span-common  pull-right collect_btn {{isCollect ? '' : ' span-success' }}"  type="button" (click)="operateCllect()"  >
         {{isCollect ? '取消收藏' : '收藏'}}
         </button>
       </div>

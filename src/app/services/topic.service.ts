@@ -54,4 +54,20 @@ export class TopicService {
   addReplayTopic(topicId: string,replyId: string, content: string) {
      return this.httpInterceptorService.post(topicId+"reply",{reply_id: replyId,r_content: content});
   }
+
+  /**
+   * 收藏
+   */
+  collection(topicId) {
+    return this.httpInterceptorService.post('/topic/collect',{topic_id: topicId})
+  }
+
+  /**
+   * 取消收藏
+   */
+  delCollection(topicId) {
+    return this.httpInterceptorService.post('/topic/de_collect',{topic_id: topicId})
+  }
 }
+
+
