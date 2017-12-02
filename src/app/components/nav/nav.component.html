@@ -22,7 +22,7 @@
         <li><a href="/me" target="">关于</a></li>
         <li><a href='/setting'>设置</a></li>
         <li *ngIf="isShow" class="logout-li" >
-          <a href='/signout' data-method="post" rel="nofollow">退出</a>
+          <a  rel="nofollow" (click)="signout()">退出</a>
         </li>
         <li *ngIf="!isShow" class="register-li"><a  routerLinkActive="active" [routerLink]="['/sing/register']">注册</a></li>
         <li *ngIf="!isShow" class="login-li" ><a  routerLinkActive="active" [routerLink]="['/sing/login']" >登录</a></li>

@@ -24,6 +24,7 @@ import {TopicModule} from "./container/topic/topic.module";
 import {LoginAndRegisterModule} from "./container/loginAndRegister/loginAndRegister.module";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {UserModule} from "./container/user/user.module";
 @NgModule({
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import {RouterModule} from "@angular/router";
     SharedModule,
     AlertModule,
     TopicModule,
-    LoginAndRegisterModule
+    LoginAndRegisterModule,
+    UserModule
 
 
   ],

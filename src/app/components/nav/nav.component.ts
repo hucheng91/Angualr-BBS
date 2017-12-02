@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import {UserService} from "../../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,10 @@ export class NavComponent implements OnInit,AfterViewInit {
   isShow: boolean;
 
 
-  constructor(private  userService: UserService) { }
+  constructor(
+    private  userService: UserService,
+    private router: Router
+  ) { }
 
 
   ngOnInit(): void {
@@ -23,6 +27,11 @@ export class NavComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit(): void {
 
+  }
+  signout() {
+    this.userService.signout().subscribe((res: any) => {
+      this.router.navigate(["/"]);
+    });
   }
 
 }

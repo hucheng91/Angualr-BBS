@@ -51,6 +51,10 @@ export const routes: Routes = [
       {
         path: 'topic',
         loadChildren: './container/topic/topic.module#TopicModule',
+      },
+      {
+        path: 'user',
+        loadChildren: './container/user/user.module#UserModule',
       }
     ]
   },

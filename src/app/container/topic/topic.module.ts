@@ -25,6 +25,7 @@ import {RouterModule} from "@angular/router";
     DetailComponent,
     CreateComponent,
     IndexComponent,
-  ]
+  ],
+  exports: [ListComponent]
 })
 export class TopicModule { }

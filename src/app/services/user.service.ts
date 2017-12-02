@@ -83,4 +83,10 @@ export class UserService {
 
 
   }
+  signout(): Observable<any> {
+    return this.httpInterceptorService.post("signout",{})
+  }
+  userCentorInformation() {
+    return this.httpInterceptorService.get("user/"+ this.user.loginname);
+  }
 }
