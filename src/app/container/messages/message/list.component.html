@@ -1,6 +1,6 @@
-<div  *ngFor="let message of items">
-
-  <div   class="cell {{!message.has_read ? 'message' : ''}}" message_id='<%= message._id %>'>
+<div  *ngIf="messages && messages.length>1" >
+  <div *ngFor="let message of messages">
+    <div   class="cell {{!message.has_read ? 'message' : ''}}" message_id='<%= message._id %>'>
       <span *ngIf="message.type == 'reply'">
           <a routerLink="//user/information/{{message.author.loginname}}" target='_blank'>{{message.author.loginname}}</a>
           回复了你的话题
@@ -23,5 +23,5 @@
 			    <a routerLink="//user/information/{{message.author.loginname}}" target='_blank'>{{message.topic.title}}</a>中@了你
 		  </span>
   </div>
-
+  </div>
 </div>

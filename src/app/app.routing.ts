@@ -56,7 +56,6 @@ export const routes: Routes = [
         path: 'user',
         loadChildren: './container/user/user.module#UserModule',
       },
-      ,
       {
         path: 'message',
         loadChildren: './container/messages/messages.module#MessagesModule',

@@ -18,6 +18,10 @@ export class UserService {
   public userInfomationObserve = this.userInfomationSu.asObservable();
 
 
+  private  messageCountSu = new Subject<any>();
+  private  messageCountObserve = this.messageCountSu.asObservable;
+
+
   constructor(private  httpInterceptorService: HttpInterceptorService) {
 
 
@@ -40,6 +44,9 @@ export class UserService {
   }
   getUserInfomation() {
     return this.userInfomationObserve;
+  }
+  getMessageCount() {
+    return this.messageCountObserve;
   }
   // 触发 订阅当前用户信息的流
   triggerUserSu(message: any) {
@@ -75,7 +82,8 @@ export class UserService {
       if (res.isLogin) {
         setTimeout(() => {
           this.triggerUserSu(res);
-          this.triggerUserInfomationSu(res.user)
+          this.triggerUserInfomationSu(res.user);
+          this.messageCountSu.next(res.messages_count);
         },500)
       }
       return true;

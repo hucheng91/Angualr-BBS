@@ -8,8 +8,12 @@ import {Router} from "@angular/router";
 })
 export class MessageListComponent implements OnInit {
 
+  messages: any;
   @Input()
-  items: any;
+ set items (items: any) {
+
+    this.messages = items;
+  };
 
   constructor(private router: Router) { }
 
