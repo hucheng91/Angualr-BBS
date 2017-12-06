@@ -84,9 +84,20 @@ export class UserService {
 
   }
   signout(): Observable<any> {
-    return this.httpInterceptorService.post("signout",{})
+    return this.httpInterceptorService.post("signout",{}).map( (res:any) => {
+      this.user = null;
+      this.triggerUserSu({});
+      this.triggerUserInfomationSu({})
+    })
   }
-  userCentorInformation() {
-    return this.httpInterceptorService.get("user/"+ this.user.loginname);
+  userCentorInformation(): Observable<any> {
+    return this.httpInterceptorService.get("user/"+ this.user.name);
+  }
+  getUserTopics(userName: string): Observable<any> {
+
+    return this.httpInterceptorService.get(/user/+userName+'/topics');
+  }
+  getCollectTopic(userName: string) {
+    return this.httpInterceptorService.get('/user/'+userName+'/collections');
   }
 }

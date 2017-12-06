@@ -7,7 +7,7 @@
         <a class='user_avatar' href="{{userInfo.loginname}}">
           <img [src]="userInfo.avatar" title="{{userInfo.loginname}}"/>
         </a>
-        <span class='user_name'><a class='dark' href="/user/{{userInfo.loginname}}">{{userInfo.loginname}}</a></span>
+        <span class='user_name'><a class='dark' routerLink="/user/information/{{userInfo.loginname}}">{{userInfo.loginname}}</a></span>
 
         <div class='board clearfix'>
           <div class='floor'>

@@ -5,7 +5,7 @@ import { Routes,
 import {UserIndexComponent} from "./index/index.component";
 const routes: Routes = [
   {
-    path: '',
+    path: 'information/:userName',
     component: UserIndexComponent,
     data: {
       title: 'user'

@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {CommonConstants} from "../../../constants/common-constant";
+import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../../services/user.service";
+import {CommonConstants} from "../../../constants/common-constant";
 
 @Component({
   selector: 'app-user-index',
@@ -10,15 +10,18 @@ import {UserService} from "../../../services/user.service";
 export class UserIndexComponent implements OnInit {
 
 
-  // user information
-  siteDes:string =  CommonConstants.SITE_DES;
   user: any;
   headerLabel: string =  "个人信息";
+  pageTitle: string;
 
+  // user information
+  siteDes:string =  CommonConstants.SITE_DES;
 
   recentTopics: any; //
 
   recentReplies: any;
+
+  collectionTopics: any;
 
 
   constructor(
@@ -28,10 +31,19 @@ export class UserIndexComponent implements OnInit {
   ngOnInit() {
 
       this.user = this.userService.user ;
-
-    this.userService.userCentorInformation().subscribe((res) => {
+    this.userService.userCentorInformation().subscribe((res: any) => {
+      this.user = res.user ;
+      this.recentTopics = res.recent_topics;
+      this.collectionTopics = res.collect_topics;
+      this.recentReplies = res.recent_replies;
+      this.pageTitle = res.pageTitle;
 
     } );
+  }
+  showCollecTopic() {
+    this.userService.getCollectTopic(this.user.name).subscribe((res: any) => {
+      this.collectionTopics = res.topics;
+    });
   }
 
 }

@@ -13,24 +13,25 @@
 </div>
 
 <div id='content'>
+
   <div class='panel'>
     <div class='header'>
       <ul class='breadcrumb'>
-        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+        <li><a routerLink='/'>主页</a><span class='divider' routerLink="">/{{pageTitle}}</span></li>
       </ul>
     </div>
     <div class='inner userinfo'>
       <div class='user_big_avatar'>
         <img [src]="user.avatar"  class="user_avatar" title=" user.loginname"/>
       </div>
-      <a class='dark'><%= user.loginname %></a>
+      <a class='dark'>{{user.loginname}}</a>
 
       <div class='user_profile'>
         <ul class='unstyled'>
           <span class='big'>{{user.score}}</span> 积分
           <li *ngIf="user.collect_topic_count">
-            <a class='dark' href="/user/<%= user.loginname %>/collections" target='_blank'>
-              <span class='big collect-topic-count'>{{user.collect_topic_count}}</span>个话题收藏
+            <a class='dark'   (click)="showCollecTopic()">
+              <span class='big collect-topic-count'> {{user.collect_topic_count}}</span>个话题收藏
             </a>
           </li>
           <li *ngIf="user.url">
@@ -53,36 +54,76 @@
           </li>
         </ul>
       </div>
-     <!-- <p class='col_fade'>注册时间 {{user.create_at}}</p>
-      <% if (current_user && current_user.is_admin) { %>
-      <% if (!user.is_star) { %>
-      <span class='span-common' id='set_star_btn' action='set_star'>设为达人</span>
-      <% } else { %>
-      <span class='span-common' id='set_star_btn' action='cancel_star'>取消达人</span>
-      <% } %>
+      <!-- <p class='col_fade'>注册时间 {{user.create_at}}</p>
+       <% if (current_user && current_user.is_admin) { %>
+       <% if (!user.is_star) { %>
+       <span class='span-common' id='set_star_btn' action='set_star'>设为达人</span>
+       <% } else { %>
+       <span class='span-common' id='set_star_btn' action='cancel_star'>取消达人</span>
+       <% } %>
 
-      <% if (!user.is_block) { %>
-      <span class='span-common' id='set_block_btn' action='set_block'>屏蔽用户</span>
-      <% } else { %>
-      <span class='span-common' id='set_block_btn' action='cancel_block'>取消屏蔽用户</span>
-      <% } %>
+       <% if (!user.is_block) { %>
+       <span class='span-common' id='set_block_btn' action='set_block'>屏蔽用户</span>
+       <% } else { %>
+       <span class='span-common' id='set_block_btn' action='cancel_block'>取消屏蔽用户</span>
+       <% } %>
 
-      <span class="span-common" id="delete_all">删除所有发言</span>
+       <span class="span-common" id="delete_all">删除所有发言</span>
 
-      <br/><br/>
-      Email (Seen by Administrator): <a href="mailto:<%= user.email %>"><%= user.email %></a>
-      <% if (!user.active) { %>
-      <a href="/active_account?key=<%- typeof(token) !== 'undefined' && token %>&name=<%= user.loginname %>"
-         target="_blank">
-         <span class="span-common">
-           激活账号
-         </span>
-      </a>
-      <% } %>
-      <% } %>-->
+       <br/><br/>
+       Email (Seen by Administrator): <a href="mailto:<%= user.email %>"><%= user.email %></a>
+       <% if (!user.active) { %>
+       <a href="/active_account?key=<%- typeof(token) !== 'undefined' && token %>&name=<%= user.loginname %>"
+          target="_blank">
+          <span class="span-common">
+            激活账号
+          </span>
+       </a>
+       <% } %>
+       <% } %>-->
     </div>
   </div>
+  <div class='panel' *ngIf="collectionTopics && collectionTopics.length>0">
+    <div class='header'>
+      <span class='col_fade'>收藏的话题</span>
+    </div>
+    <div class='cell'  *ngFor="let topic of collectionTopics">
 
+      <a class="user_avatar pull-left" href="{{topic.author.loginname}}">
+        <img [src]="topic.author.avatar_url"
+             title="topic.author.loginname"
+        />
+      </a>
+
+      <span class="reply_count pull-left">
+    <span class="count_of_replies" title="回复数">
+      {{topic.reply_count}}
+    </span>
+    <span class="count_seperator">/</span>
+    <span class="count_of_visits" title='点击数'>
+      {{topic.visit_count}}
+    </span>
+  </span>
+      <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" routerLink="/topic/detail/{{topic.id}}" >
+        <img class="user_small_avatar" [src]="topic.reply.author.avatar_url">
+        <span class="last_active_time">{{topic.reply}}</span>
+      </a>
+      <span class='last_time pull-right'>
+      <span class="last_active_time">{{topic.create_at}}</span>
+    </span>
+      <div class="topic_title_wrapper">
+
+        <span class='put_top' *ngIf="topic.top">置顶</span>
+        <span class='put_good' *ngIf="topic.good">精华</span>
+        <span class="topiclist-tab" *ngIf="!topic.top && !topic.good">{{topic.tab | tabsPipe}}</span>
+
+        <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" routerLink="/topic/detail/{{topic.id}}" title='{{topic.title}}'>
+          {{topic.title}}
+        </a>
+      </div>
+    </div>
+
+  </div>
   <div class='panel'>
     <div class='header'>
       <span class='col_fade'>最近创建的话题</span>
@@ -104,7 +145,8 @@
       {{topic.visit_count}}
     </span>
   </span>
-      <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" (click)="detail(topic.id)" >
+      <!--(click)="detail(topic.id)"-->
+      <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" >
         <img class="user_small_avatar" [src]="topic.reply.author.avatar_url">
         <span class="last_active_time">{{topic.reply}}</span>
       </a>
@@ -117,15 +159,14 @@
         <span class='put_good' *ngIf="topic.good">精华</span>
         <span class="topiclist-tab" *ngIf="!topic.top && !topic.good">{{topic.tab | tabsPipe}}</span>
 
-        <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" (click)="detail(topic.id)" title='{{topic.title}}'>
+        <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" routerLink="/topic/detail/{{topic.id}}"  title='{{topic.title}}'>
           {{topic.title}}
         </a>
       </div>
     </div>
-    <div class='cell more'>
-      <a class='dark' href="/user/<%= user.loginname %>/topics">查看更多»</a>
-    </div>
+
   </div>
+
 
   <div class='panel'>
     <div class='header'>
@@ -148,7 +189,7 @@
       {{topic.visit_count}}
     </span>
   </span>
-      <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" (click)="detail(topic.id)" >
+      <a class='last_time pull-right' *ngIf="topic.reply && topic.reply.author" routerLink="/topic/detail/{{topic.id}}" >
         <img class="user_small_avatar" [src]="topic.reply.author.avatar_url">
         <span class="last_active_time">{{topic.reply}}</span>
       </a>
@@ -161,15 +202,14 @@
         <span class='put_good' *ngIf="topic.good">精华</span>
         <span class="topiclist-tab" *ngIf="!topic.top && !topic.good">{{topic.tab | tabsPipe}}</span>
 
-        <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" (click)="detail(topic.id)" title='{{topic.title}}'>
+        <a class='topic_title' [ngClass]="{'topic_top_good': topic.top||topic.good}" routerLink="/topic/detail/{{topic.id}}" title='{{topic.title}}'>
           {{topic.title}}
         </a>
       </div>
     </div>
-    <div class='cell more'>
-      <a class='dark' href="/user/<%= user.loginname %>/replies">查看更多»</a>
-    </div>
+
   </div>
+
 </div>
 
 

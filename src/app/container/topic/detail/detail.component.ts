@@ -55,12 +55,11 @@ export class DetailComponent implements OnInit,AfterViewInit {
 
 
   ngOnInit() {
-    console.log(this.topic);
     this.isLogin = this.userService.isCUrrentUserLogin();
     this.current_user = this.userService.getCurentUser();
     this.route.paramMap.subscribe((params: ParamMap) => {
      this.initData(params.get('id'));
-  });
+    });
 
 
   }
