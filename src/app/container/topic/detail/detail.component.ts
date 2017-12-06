@@ -75,13 +75,16 @@ export class DetailComponent implements OnInit,AfterViewInit {
         this.allReplayNamesArry = this.replies.map((replay:any) => {return replay.author.loginname;});
 
         // 初始化底下框的艾特
-        this.initAt((<any>window).topic_editor);
+        if(this.current_user){
+          this.initAt((<any>window).topic_editor);
+        }
       }
     });
 
   }  ngAfterViewInit(): void {
-
-    this.initEditor()
+    if(this.current_user) {
+      this.initEditor()
+     }
   }
 
 

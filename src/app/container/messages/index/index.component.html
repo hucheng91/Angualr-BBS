@@ -1,0 +1,43 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="user" [headerLabel]="headerLabel"></app-user-information>
+    <div class="panel" >
+      <div class='inner'>
+        <a  routerLinkActive="active" [routerLink]="['/topic/create']"  id='create_topic_btn'>
+          <span class='span-success'>发布话题</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <app-friendbbs></app-friendbbs>
+</div>
+
+<div id='content'>
+
+  <div class='panel'>
+    <div class='header'>
+      <ul class='breadcrumb'>
+        <li><a routerLink='/'>主页</a><span class='divider'>/</span></li>
+        <li class='active'>新消息</li>
+      </ul>
+    </div>
+    <app-message-list [items]="notReadMessages" ></app-message-list>
+    <div class='inner' *ngIf=" !notReadMessages || notReadMessages.length<1">
+      <p>无消息</p>
+    </div>
+  </div>
+  <div class='panel' >
+    <div class='header'>
+      <span class='col_fade'>过往信息</span>
+    </div>
+    <app-message-list [items]="hasReadMessages"></app-message-list>
+    <div class='inner' *ngIf=" !hasReadMessages || hasReadMessages.length<1">
+      <p>无消息</p>
+    </div>
+  </div>
+
+
+
+</div>
+
+

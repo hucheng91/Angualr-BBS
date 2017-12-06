@@ -30,7 +30,7 @@ export class UserService {
 
      if(this.user) {return this.user};
 
-     const  cacheUser = sessionStorage.getItem("current_user");
+     let  cacheUser = sessionStorage.getItem("current_user");
      if(cacheUser) { return JSON.parse(cacheUser)}
 
     return null ;
@@ -86,6 +86,7 @@ export class UserService {
   signout(): Observable<any> {
     return this.httpInterceptorService.post("signout",{}).map( (res:any) => {
       this.user = null;
+      sessionStorage.removeItem("current_user");
       this.triggerUserSu({});
       this.triggerUserInfomationSu({})
     })
@@ -97,7 +98,12 @@ export class UserService {
 
     return this.httpInterceptorService.get(/user/+userName+'/topics');
   }
-  getCollectTopic(userName: string) {
+  getCollectTopic(userName: string): Observable<any> {
     return this.httpInterceptorService.get('/user/'+userName+'/collections');
+  }
+
+  getMessages(): Observable<any> {
+    return this.httpInterceptorService.get('/my/messages');
+
   }
 }

@@ -11,7 +11,7 @@ export class CommonConstants {
     {id: 'job', text: "招聘"}
     ];
 
-  static SITE_DES: string = "Angular 中文社区";
+  static SITE_DES: string = "Angular 开发者社区";
 
   /*http 头信息*/
   static APP_CODE_RACE: any = {id: "x-app-code" ,code:"race"};

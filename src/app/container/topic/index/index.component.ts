@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit {
   }
   swichTab(tab, activeNumber) {
     this.activeItemIndex = activeNumber;
-    this.listComponent.getAllTopic(tab);
+    this.listComponent.getAllTopic(tab).subscribe();
     this.listComponent.activeTab = tab;
   }
 }

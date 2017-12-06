@@ -74,7 +74,7 @@
                 <span   *ngIf="reply.author.loginname === topic.author.loginname" class="reply_by_author">作者</span>
               </div>
               <div class='user_action'>
-                <span>
+                <span *ngIf="current_user">
                   <i class="fa up_btn fa-thumbs-o-up" (click)="ups(reply,upCountSpan)"
                      title="喜欢"></i>
                   <span class="up-count" #upCountSpan>

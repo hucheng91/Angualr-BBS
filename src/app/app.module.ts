@@ -25,6 +25,7 @@ import {LoginAndRegisterModule} from "./container/loginAndRegister/loginAndRegis
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {UserModule} from "./container/user/user.module";
+import {MessagesModule} from "./container/messages/messages.module";
 @NgModule({
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import {UserModule} from "./container/user/user.module";
     AlertModule,
     TopicModule,
     LoginAndRegisterModule,
-    UserModule
+    UserModule,
+    MessagesModule
 
 
   ],
