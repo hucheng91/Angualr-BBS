@@ -109,7 +109,7 @@ export class DetailComponent implements OnInit,AfterViewInit {
   replayFristTopic() {
     let reply = {operate: "add"};
     this.replayTopic(reply);
-    this.initEditor();
+   // this.initEditor();
   }
   /**
    * 添加二级，修改二级回复

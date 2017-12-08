@@ -26,6 +26,9 @@ import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {UserModule} from "./container/user/user.module";
 import {MessagesModule} from "./container/messages/messages.module";
+import {AboutModule} from "./container/about/about.module";
+import {AdsComponent} from "./components/ads/ads.component";
+import {GetstartModule} from "./container/getstart/getstart.module";
 @NgModule({
   imports: [
     BrowserModule,
@@ -40,9 +43,9 @@ import {MessagesModule} from "./container/messages/messages.module";
     TopicModule,
     LoginAndRegisterModule,
     UserModule,
-    MessagesModule
-
-
+    MessagesModule,
+    AboutModule,
+    GetstartModule
   ],
   declarations: [
     AppComponent,

@@ -5,9 +5,9 @@
       <p>{{siteDes}}</p>
       <div>
         您可以
-        <a href='/signin'>登录</a>
+        <a [routerLink]="['/sing/login']">登录</a>
         或
-        <a href='/signup'>注册</a>
+        <a [routerLink]="['/sing/register']">注册</a>
         , 也可以
         <a href="/auth/github">
           <span class="span-info">
@@ -27,6 +27,7 @@
   <app-no-reply-topic [noReplyTopics]="noReplayTopic" ></app-no-reply-topic>
   <app-top-star [topsTopic]="topsTopic"></app-top-star>
   <app-friendbbs></app-friendbbs>
+  <app-ads></app-ads>
 </div>
 <div id="content">
   <div class="panel">

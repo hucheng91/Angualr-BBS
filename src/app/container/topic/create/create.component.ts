@@ -41,7 +41,7 @@ export class CreateComponent implements OnInit,AfterViewInit {
     this.topicServcie.saveTopic(this.topic).subscribe((res) => {
       this.alertService.success("","保存成功!");
       setTimeout(() => {
-        this.userServcie.triggerUserInfomationSu(res.data);
+        this.userServcie.triggerUserSu({user: res.data, isLogin: true}); // 通知 右侧更新用户信息，积分信息
       } ,100)
       this.router.navigate(["/topic"])
     });

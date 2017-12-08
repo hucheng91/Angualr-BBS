@@ -33,6 +33,34 @@ export const routes: Routes = [
         loadChildren: './container/loginAndRegister/loginAndRegister.module#LoginAndRegisterModule',
       }
     ]
+  }
+  ,
+  {
+    path: 'getstart',
+    component: FullLayoutComponent,
+    data: {
+      title: 'getStart'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './container/getstart/getstart.module#GetstartModule',
+      }
+    ]
+  }
+  ,
+  {
+    path: 'about',
+    component: FullLayoutComponent,
+    data: {
+      title: 'about this site'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './container/about/about.module#AboutModule',
+      }
+    ]
   },
   {
     path: '',

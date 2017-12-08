@@ -10,6 +10,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {PaginationModule} from "ngx-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {AdsComponent} from "../../components/ads/ads.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +26,9 @@ import {RouterModule} from "@angular/router";
     DetailComponent,
     CreateComponent,
     IndexComponent,
+    AdsComponent
+
   ],
-  exports: [ListComponent]
+  exports: [ListComponent,AdsComponent]
 })
 export class TopicModule { }

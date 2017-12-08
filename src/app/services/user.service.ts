@@ -14,12 +14,6 @@ export class UserService {
   private userSu = new Subject<any>();
   public userObserve = this.userSu.asObservable();
 
-  private userInfomationSu = new Subject<any>();
-  public userInfomationObserve = this.userInfomationSu.asObservable();
-
-
-  private  messageCountSu = new Subject<any>();
-  private  messageCountObserve = this.messageCountSu.asObservable;
 
 
   constructor(private  httpInterceptorService: HttpInterceptorService) {
@@ -42,21 +36,14 @@ export class UserService {
   isCUrrentUserLogin(): boolean {
     return (this.user || sessionStorage.getItem("current_user")) ? true : false;
   }
-  getUserInfomation() {
-    return this.userInfomationObserve;
-  }
-  getMessageCount() {
-    return this.messageCountObserve;
-  }
+
+
   // 触发 订阅当前用户信息的流
   triggerUserSu(message: any) {
     this.user = message.user;
     this.userSu.next(message);
   }
-  // 触发 订阅个人信息的流
-  triggerUserInfomationSu(message: any) {
-    this.userInfomationSu.next(message);
-  }
+
 
 
   login(userName: string,password: string): Observable<boolean> {
@@ -66,7 +53,6 @@ export class UserService {
        // todo 直接订阅一直不生效,放在setTimeout 中才生效,原因待查
       setTimeout(() => {
         this.triggerUserSu({user: res.data, isLogin: true});
-        this.triggerUserInfomationSu(this.user);
       },500);
 
        return true;
@@ -82,8 +68,6 @@ export class UserService {
       if (res.isLogin) {
         setTimeout(() => {
           this.triggerUserSu(res);
-          this.triggerUserInfomationSu(res.user);
-          this.messageCountSu.next(res.messages_count);
         },500)
       }
       return true;
@@ -96,16 +80,12 @@ export class UserService {
       this.user = null;
       sessionStorage.removeItem("current_user");
       this.triggerUserSu({});
-      this.triggerUserInfomationSu({})
     })
   }
   userCentorInformation(): Observable<any> {
     return this.httpInterceptorService.get("user/"+ this.user.name);
   }
-  getUserTopics(userName: string): Observable<any> {
 
-    return this.httpInterceptorService.get(/user/+userName+'/topics');
-  }
   getCollectTopic(userName: string): Observable<any> {
     return this.httpInterceptorService.get('/user/'+userName+'/collections');
   }

@@ -18,8 +18,13 @@
     <div class='header'>
       <ul class='breadcrumb'>
         <li><a routerLink='/'>主页</a><span class='divider'>/</span></li>
-        <li class='active'>新消息</li>
+        <li class='active'>消息</li>
       </ul>
+    </div>
+  </div>
+  <div class='panel' >
+    <div class='header'>
+      <span class='col_fade'>新消息</span>
     </div>
     <app-message-list [items]="notReadMessages" ></app-message-list>
     <div class='inner' *ngIf=" !notReadMessages || notReadMessages.length<1">
@@ -30,10 +35,10 @@
     <div class='header'>
       <span class='col_fade'>过往信息</span>
     </div>
-    <app-message-list [items]="hasReadMessages"></app-message-list>
+   <app-message-list [items]="hasReadMessages"></app-message-list>
     <div class='inner' *ngIf=" !hasReadMessages || hasReadMessages.length<1">
       <p>无消息</p>
-    </div>
+  </div>
   </div>
 
 

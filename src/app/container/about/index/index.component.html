@@ -1,0 +1,38 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="user" [headerLabel]="headerLabel"></app-user-information>
+    <div class="panel" >
+      <div class='inner'>
+        <a  routerLinkActive="active" [routerLink]="['/topic/create']"  id='create_topic_btn'>
+          <span class='span-success'>发布话题</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <app-friendbbs></app-friendbbs>
+</div>
+
+<div id="content">
+  <div class="panel">
+    <div class="header">
+      <ul class="breadcrumb">
+        <li><a href="/">主页</a><span class="divider">/</span></li>
+        <li class="active">关于</li>
+      </ul>
+    </div>
+    <div class="inner topic">
+      <div class="topic_content">
+        <div class="markdown-text"><h3>关于</h3>
+          <p>Angular 开发者社区致力于 Node.js 的技术研究，目标是成为国内最具影响力的 Angular 开源技术社区</p>
+          <p>Angular 开发者社区由一批热爱 Angular 技术的工程师发起，目前已经吸引了互联网各个公司的专业技术人员加入，我们非常欢迎更多对Angular 感兴趣的朋友。</p>
+          <p>Angular 开发者社区成立的缘由是 国内没有一个好的社区来沉淀Angular相关的知识，很多Angular相关的QQ群里，开发者相同的问题重复出现,形成很多信息的孤岛，于是便有了建立社区的想法</p>
+
+          <h3>移动客户端</h3>
+          <p>客户端正在抓紧研发中</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

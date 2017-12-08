@@ -30,7 +30,7 @@
         <ul class='unstyled'>
           <span class='big'>{{user.score}}</span> 积分
           <li *ngIf="user.collect_topic_count">
-            <a class='dark'   (click)="showCollecTopic()">
+            <a class='dark'   (click)="showCollecTopic()" style="color: #1976d2;">
               <span class='big collect-topic-count'> {{user.collect_topic_count}}</span>个话题收藏
             </a>
           </li>

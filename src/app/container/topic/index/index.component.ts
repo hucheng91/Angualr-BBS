@@ -27,14 +27,12 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userInfo = this.userService.user;
     this.listComponent.getAllTopic("all").subscribe((res:any) => {
       this.noReplayTopic = res.noReplay;
       this.topsTopic = res.topTopic;
     });
 
-    this.userService.getUserInfomation().subscribe((res) => {
-      this.userInfo = res ;
-    });
   }
   swichTab(tab, activeNumber) {
     this.activeItemIndex = activeNumber;
