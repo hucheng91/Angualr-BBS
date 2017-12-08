@@ -9,17 +9,17 @@
         <input type='text' id='q' name='q' class='search-query span3' value=''/>
       </form>
       <ul class='nav pull-right'>
-        <li><a href='/'>首页</a></li>
+        <li><a routerLink='/'>首页</a></li>
         <li>
           <a routerLink='/message'>
             未读消息
-            <span class='big messages_count'>10</span>
+            <span class='big messages_count'>{{ notReadMessageCount + ""}}</span>
           </a>
         </li>
-        <li><a href='/getstart'>新手入门</a></li>
-        <li><a href='/api'>API</a></li>
+        <li><a routerLink='/getstart'>新手入门</a></li>
+        <li><a href='https://angular.cn/' target='_blank'>官方文档</a></li>
 
-        <li><a href="/me" target="">关于</a></li>
+        <li><a routerLink="/about" target="">关于</a></li>
         <li><a href='/setting'>设置</a></li>
         <li *ngIf="isShow" class="logout-li" >
           <a  rel="nofollow" (click)="signout()">退出</a>
