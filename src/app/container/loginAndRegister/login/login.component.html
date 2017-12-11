@@ -56,12 +56,12 @@
       </form>
         <div class='form-actions'>
           <input type='button' class='span-primary' value='登录' [disabled]="!loginForm.form.valid" (click)="login()" />
-          <a href="/auth/github">
+          <a href="api/auth/github">
             <span class="span-info">
               通过 GitHub 登录
             </span>
           </a>
-          <a id="forgot_password" routerLinkActive="active" [routerLink]="['/search_pass']" >忘记密码了?</a>
+          <a id="forgot_password" routerLinkActive="active" [routerLink]="['api/search_pass']" >忘记密码了?</a>
         </div>
 
 

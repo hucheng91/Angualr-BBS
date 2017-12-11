@@ -36,7 +36,7 @@
           </li>
           <li *ngIf="user.url">
             <i class="fa fa-lg fa-fw fa-home"></i>
-            <a class='dark' href="<%= user.url %>" target='_blank'>{{user.url}}</a>
+            <a class='dark' href="user.url" target='_blank'>{{user.url}}</a>
           </li>
           <li *ngIf="user.location">
             <i class="fa fa-lg fa-fw fa-map-marker"></i>
@@ -44,13 +44,13 @@
           </li>
           <li *ngIf="user.githubUsername">
             <i class="fa fa-lg fa-fw fa-github"></i>
-            <a class='dark' href="https://github.com/<%= user.githubUsername %>" target='_blank'>
+            <a class='dark' href="https://github.com/user.githubUsername" target='_blank'>
               {{user.githubUsername}}
             </a>
           </li>
           <li *ngIf="user.weibo">
             <i class="fa fa-lg fa-fw fa-twitter"></i>
-            <a class='dark' href="<%= user.weibo %>" target='_blank'> {{user.weibo}}</a>
+            <a class='dark' href="user.weibo" target='_blank'> {{user.weibo}}</a>
           </li>
         </ul>
       </div>

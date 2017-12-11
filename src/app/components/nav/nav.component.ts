@@ -22,8 +22,12 @@ export class NavComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.notReadMessageCount = 0;
     this.userService.listenUser().subscribe((res) => {
-      this.isShow = res.isLogin;
-      this.notReadMessageCount = parseInt(res.user.messages_count,10);
+      this.isShow = !res.isLogin ? false : true;
+      if (res.user && res.user.messages_count){
+        this.notReadMessageCount = parseInt(res.user.messages_count ,10);
+      }else {
+        this.notReadMessageCount = 0
+      }
     });
 
   }

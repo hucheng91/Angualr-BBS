@@ -1,10 +1,10 @@
-  <div class='header' *ngIf="userInfo">
+    <div class='header' *ngIf="userInfo">
     <span class='col_fade'> {{headerLabel}}</span>
   </div>
   <div class='inner' *ngIf="userInfo">
     <div class='user_card'>
       <div>
-        <a class='user_avatar' href="{{userInfo.loginname}}">
+        <a class='user_avatar' routerLink="/user/information/{{userInfo.loginname}}">
           <img [src]="userInfo.avatar" title="{{userInfo.loginname}}"/>
         </a>
         <span class='user_name'><a class='dark' routerLink="/user/information/{{userInfo.loginname}}">{{userInfo.loginname}}</a></span>

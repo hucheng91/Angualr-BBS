@@ -8,8 +8,7 @@ export class UserService {
 
   // 当前登录用户
   user: any;
-  // 右侧显示的用户信息
-  userInfomation: any;
+
   // 用户信息 observe对象
   private userSu = new Subject<any>();
   public userObserve = this.userSu.asObservable();
@@ -63,12 +62,15 @@ export class UserService {
   }
   checkLogin(url: string): Observable<boolean> {
     return this.httpInterceptorService.get("user/checkLogin").map((res: any) => {
-      this.user = res.user;
-      sessionStorage.setItem("current_user",this.user);
-      if (res.isLogin) {
+      if(res.isLogin) {
+        this.user = res.user;
+        sessionStorage.setItem("current_user",this.user);
         setTimeout(() => {
           this.triggerUserSu(res);
         },500)
+      }else {
+        this.user = null;
+        sessionStorage.removeItem("current_user");
       }
       return true;
     },(eror) => { return Observable.throw(eror)});
@@ -87,11 +89,25 @@ export class UserService {
   }
 
   getCollectTopic(userName: string): Observable<any> {
-    return this.httpInterceptorService.get('/user/'+userName+'/collections');
+    return this.httpInterceptorService.get('user/'+userName+'/collections');
   }
 
   getMessages(): Observable<any> {
-    return this.httpInterceptorService.get('/my/messages');
+    return this.httpInterceptorService.get('my/messages');
 
   }
+
+  changeSettion(action: string,user: any) {
+
+    user.action = action ;
+    return this.httpInterceptorService.post('setting',user);
+  }
+
+  getUserInfomation() {
+    return this.httpInterceptorService.get('setting');
+  }
+
+
 }
+
+

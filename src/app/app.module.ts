@@ -29,6 +29,7 @@ import {MessagesModule} from "./container/messages/messages.module";
 import {AboutModule} from "./container/about/about.module";
 import {AdsComponent} from "./components/ads/ads.component";
 import {GetstartModule} from "./container/getstart/getstart.module";
+import {SettingModule} from "./container/setting/setting.module";
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import {GetstartModule} from "./container/getstart/getstart.module";
     UserModule,
     MessagesModule,
     AboutModule,
-    GetstartModule
+    GetstartModule,
+    SettingModule
   ],
   declarations: [
     AppComponent,

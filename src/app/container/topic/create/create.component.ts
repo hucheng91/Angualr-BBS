@@ -37,7 +37,9 @@ export class CreateComponent implements OnInit,AfterViewInit {
   }
   save($t_content) {
     // todo ngModel 绑定 拿不到content
+
     this.topic.t_content = (<any>window).topic_editor.codemirror.getValue();
+    if(this.topic.title.length < 5) { this.alertService.error("","标题字数太少")}
     this.topicServcie.saveTopic(this.topic).subscribe((res) => {
       this.alertService.success("","保存成功!");
       setTimeout(() => {

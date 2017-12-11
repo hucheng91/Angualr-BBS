@@ -18,6 +18,7 @@ export class IndexComponent implements OnInit {
   // user information
   siteDes:string =  CommonConstants.SITE_DES;
   userInfo: any;
+  isLogin: boolean;
   headerLabel: string =  "个人信息";
 
   @ViewChild(ListComponent)listComponent: ListComponent;
@@ -27,7 +28,10 @@ export class IndexComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userInfo = this.userService.user;
+    this.userService.listenUser().subscribe((res: any) => {
+      this.userInfo = res.user;
+      this.isLogin = res.isLogin;
+    });
     this.listComponent.getAllTopic("all").subscribe((res:any) => {
       this.noReplayTopic = res.noReplay;
       this.topsTopic = res.topTopic;

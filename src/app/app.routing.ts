@@ -63,6 +63,20 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'setting',
+    component: FullLayoutComponent,
+    data: {
+      title: 'about this site'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './container/setting/setting.module#SettingModule',
+      }
+    ]
+  },
+
+  {
     path: '',
     redirectTo: 'topic',
     pathMatch: 'full',

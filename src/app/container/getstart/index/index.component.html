@@ -1,0 +1,43 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="user" [headerLabel]="headerLabel"></app-user-information>
+    <div class="panel" >
+      <div class='inner'>
+        <a  routerLinkActive="active" [routerLink]="['/topic/create']"  id='create_topic_btn'>
+          <span class='span-success'>发布话题</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <app-friendbbs></app-friendbbs>
+</div>
+
+<div id="content">
+  <div class="panel">
+    <div class="header">
+      <ul class="breadcrumb">
+        <li><a href="/">主页</a><span class="divider">/</span></li>
+        <li class="active">Angular 新手入门</li>
+      </ul>
+    </div>
+    <div class="inner topic">
+      <div class="topic_content">
+        <div class="markdown-text"><h2>Angular 入门</h2>
+          <p>《<strong>官方文档</strong>》</p>
+          <p><a href="https://angular.cn/" target="_blank">跟着例子一步一步来开启你的Angular之路</a></p>
+          <p>《<strong>大漠穷秋 Angular入门教程</strong>》</p>
+          <p><a href="" target="_blank">xxx</a></p>
+          <h2>Angular 资源</h2>
+          <p>《<strong>NiceFish</strong>》</p>
+          <p><a href="https://cnodejs.org/topic/56ef3edd532839c33a99d00e" target="_blank">https://gitee.com/mumu-osc/NiceFish</a></p>
+          <h2>常用组件库</h2>
+          <p>xxx</p>
+          <h2>Angular 团队博客</h2>
+          <p>xxx</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
