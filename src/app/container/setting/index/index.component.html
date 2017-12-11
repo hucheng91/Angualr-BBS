@@ -1,0 +1,116 @@
+<div id='sidebar'>
+  <div class='panel'>
+    <app-user-information [userInfo]="user" [headerLabel]="headerLabel"></app-user-information>
+    <div class="panel" >
+      <div class='inner'>
+        <a  routerLinkActive="active" [routerLink]="['/topic/create']"  id='create_topic_btn'>
+          <span class='span-success'>发布话题</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <app-friendbbs></app-friendbbs>
+</div>
+<div id="content">
+  <div class="panel">
+    <div class="header">
+      <ul class="breadcrumb">
+        <li><a href="/">主页</a><span class="divider">/</span></li>
+        <li class="active">设置</li>
+      </ul>
+    </div>
+    <div class="inner topic">
+      <div class="topic_content">
+          <div class='control-group'>
+            <label class='control-label' for='name'>用户名</label>
+
+            <div class='controls'>
+              <input class='input-xlarge readonly' id='name' name='name' size='30' type='text'
+                     [(ngModel)]="user.loginname"/>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label' for='email'>电子邮件</label>
+
+            <div class='controls'>
+              <input class='input-xlarge readonly' id='email' name='email' size='30' type='text'
+                      [(ngModel)]=" user.email"/>
+
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label' for='url'>个人网站</label>
+
+            <div class='controls'>
+              <input class='input-xlarge' id='url' name='url' size='30' type='text' [(ngModel)]="user.url"/>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label' for='location'>所在地点</label>
+
+            <div class='controls'>
+              <input class='input-xlarge' id='location' name='location' size='30' type='text'
+                     [(ngModel)]="user.location"/>
+            </div>
+          </div>
+
+          <div class='control-group'>
+            <label class='control-label' for='weibo'>微博</label>
+
+            <div class='controls'>
+              <input class='input-xlarge' id='weibo' name='weibo' size='30' type='text' [(ngModel)]="user.weibo"
+                     placeholder="e.g. http://weibo.com/angular"/>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label' for='github'>GitHub</label>
+
+            <div class='controls'>
+              <input class='input-xlarge' id='github' name='github' size='30' type='text'
+                     value="{{'@'+user.githubUsername}}"  placeholder="@username"  />
+              <p>请通过 GitHub 登陆 Angular开发者社区 来修改此处</p>
+            </div>
+          </div>
+          <div class='control-group'>
+            <label class='control-label' for='signature'>个性签名</label>
+
+            <div class='controls'>
+              <textarea class='input-xlarge' id='signature' name='signature' size='30' [(ngModel)]="user.signature"></textarea>
+            </div>
+          </div>
+
+          <div class='form-actions'>
+            <input type='button' (click)="changeSetting('change_setting')" class='span-primary submit_btn' data-loading-text="保存中.." value='保存设置'/>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class='panel'>
+    <div class='header'>
+      <span class='col_fade'>更改密码</span>
+    </div>
+    <div class='inner'>
+        <div class='control-group'>
+          <label class='control-label' for='old_pass'>当前密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='password' id='old_pass' [(ngModel)]='user.old_pass' size='30'/>
+          </div>
+        </div>
+        <div class='control-group'>
+          <label class='control-label' for='new_pass'>新密码</label>
+
+          <div class='controls'>
+            <input class='input-xlarge' type='password' id='new_pass' [(ngModel)]='user.new_pass' size='30'/>
+          </div>
+        </div>
+        <div class='form-actions'>
+          <input type='button'  (click)="changeSetting('change_password')" class='span-primary submit_btn' data-loading-text="更改中.." value='更改密码'/>
+        </div>
+    </div>
+  </div>
+
+
+</div>
+
+
