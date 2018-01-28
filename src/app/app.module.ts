@@ -43,11 +43,6 @@ import {SettingModule} from "./container/setting/setting.module";
     AlertModule,
     TopicModule,
     LoginAndRegisterModule,
-    UserModule,
-    MessagesModule,
-    AboutModule,
-    GetstartModule,
-    SettingModule
   ],
   declarations: [
     AppComponent,

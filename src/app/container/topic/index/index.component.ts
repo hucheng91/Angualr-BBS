@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ListComponent} from "../list/list.component";
 import {CommonConstants} from "../../../constants/common-constant";
 import {UserService} from "../../../services/user.service";
+import {HttpInterceptorService} from "../../../commonModule/http/interceptor/http-interceptor.service";
 
 @Component({
   selector: 'app-topic-index',
@@ -24,7 +25,8 @@ export class IndexComponent implements OnInit {
   @ViewChild(ListComponent)listComponent: ListComponent;
 
   constructor(
-    private  userService: UserService
+    private  userService: UserService,
+    private  httpservice: HttpInterceptorService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class IndexComponent implements OnInit {
     });
 
   }
+
   swichTab(tab, activeNumber) {
     this.activeItemIndex = activeNumber;
     this.listComponent.getAllTopic(tab).subscribe();
